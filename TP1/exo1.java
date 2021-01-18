@@ -21,11 +21,6 @@ public class exo1{
       threadList[x] = new monThread1();
       threadList[x].setName("Thread n°"+x);
       System.out.println(threadList[x].getPriority());
-      if(x<5){
-        threadList[x].setPriority(Thread.MAX_PRIORITY);
-      }else{
-        threadList[x].setPriority(Thread.MIN_PRIORITY);
-      }
       threadList[x].start();
     }
     System.out.println(monThread1.activeCount());
