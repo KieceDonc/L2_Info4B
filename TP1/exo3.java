@@ -1,3 +1,15 @@
+/*
+  Réaliser un programme qui simule une course de threads. Chaque thread démarre et
+compte jusqu’à 1000. Dans la boucle simulant la course du thread, implanter une attente
+aléatoire avec la méthode sleep() et la méthode Math.random(). Le premier thread arrivé
+à 1000 est déclaré gagnant, néanmoins les autres threads continuent la course.
+
+  1. Programmer le course en veillant à ce que votre programme soit en mesure d’établi
+et d’afficher un classement lorsque tous les threads sont arrivés.
+
+  2. Comment implanter un arbitre qui observe la course et établi le classement ?
+*/
+
 public class exo3{
 
 
