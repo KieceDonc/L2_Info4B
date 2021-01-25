@@ -12,7 +12,6 @@ et d’afficher un classement lorsque tous les threads sont arrivés.
 
 public class exo3{
 
-
   private static int nbThread = 10;
   public static void main(String[] args){
 
@@ -64,7 +63,7 @@ class Ranking{
     ranking = new String[nbThread];
   }
 
-  public void onThreadCountingEnd(String name){
+  public synchronized void onThreadCountingEnd(String name){
     ranking[index] = name;
     index++;
   }
