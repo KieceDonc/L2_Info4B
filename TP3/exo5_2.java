@@ -24,38 +24,67 @@ top.
   incrémenter la valeur de l’index du distributeurtester si nb est premier fin pour utilisez 
   tous les cœurs, mesurez le temps d’exécution de cette version, calculer lefacteur d’accélération (speed-up). 
   Quel est lespeed-upthéorique maximum ?
-  */
+*/
 
-class exo5_1{
+class exo5_2{
 
-  public static ArrayList<Integer> premiers = new ArrayList<Integer>();
+  public static ArrayList<CustomThread> threadList = new ArrayList();
   public static long startTime = 0;
   public static long endTime = 0;
+  public static int logicalCores = 4;
+  public static int countTo = 80000;
 
   public static void main(String[] args){
     startTime = System.currentTimeMillis();
-    for(int x=0;x<=50000;x++){
-      if(isPrime(x)){
-        premiers.add(x);
+    
+    for(int x=0;x<logicalCores;x++){
+      int tmp = countTo/logicalCores;
+      CustomThread calc = new CustomThread(tmp*x,tmp*(x+1));
+      threadList.add(calc);
+      calc.start();
+    }
+
+    for(int x=0;x<logicalCores;x++){
+      try{
+        threadList.get(x).join();
+      }catch(Exception err){
+        err.printStackTrace();
       }
     }
+
     endTime = System.currentTimeMillis();
-    for(int x=0;x<premiers.size();x++){
-      System.out.println("n°"+x+" = "+premiers.get(x));
-    }
     System.out.println("Temps de calcul : "+(endTime-startTime)+"ms");
   }
 
-  public static boolean isPrime(int nb){
-    if(nb==1 || nb==0){
-      return true;
+  public static class CustomThread extends Thread{
+
+    private int from = 0;
+    private int to = 0;
+
+    CustomThread(int from, int to){
+      this.from = from;
+      this.to = to;
     }
-    int divider = 2;
-    boolean isPrime = true;
-    do{
-      isPrime = nb % divider!=0;
-      divider++;
-    }while(isPrime && divider<nb);
-    return isPrime;
+
+    public void run(){
+      for(int x=from;x<=to;x++){
+        if(isPrime(x)){
+          System.out.println(x+" est un nombre premier");
+        }
+      }
+    }
+
+    public boolean isPrime(int nb){
+      if(nb==1 || nb==0){
+        return true;
+      }
+      int divider = 2;
+      boolean isPrime = true;
+      do{
+        isPrime = nb % divider!=0;
+        divider++;
+      }while(isPrime && divider<nb);
+      return isPrime;
+    }
   }
 }

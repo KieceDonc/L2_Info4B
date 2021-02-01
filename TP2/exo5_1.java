@@ -34,7 +34,7 @@ class exo5_1{
 
   public static void main(String[] args){
     startTime = System.currentTimeMillis();
-    for(int x=0;x<=50000;x++){
+    for(int x=0;x<=80000;x++){
       if(isPrime(x)){
         premiers.add(x);
       }
